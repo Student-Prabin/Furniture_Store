@@ -2,12 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom"
 import { ShopContext } from "../context/ShopContext.jsx";
 import { LuFacebook, LuLinkedin, LuStar, LuTwitter } from "react-icons/lu";
-import SubTitle from "../components/SubTitle.jsx";
-import ProductItem from "../components/ProductItem.jsx";
+import RelatedProducts from "../components/RelatedProducts.jsx";
 
 const Product = () => {
   const { id } = useParams();
-  const { products, currency } = useContext(ShopContext);
+  const { products, currency, addToCart } = useContext(ShopContext);
   const [productData, setProductData] = useState(false);
   const [image, setImage] = useState('');
   const [size, setSize] = useState('');
@@ -28,6 +27,9 @@ const Product = () => {
       }
     })
   }
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [id]);
 
   useEffect(() => {
     fetchProductData();
@@ -83,7 +85,7 @@ const Product = () => {
               {
                 // REMINDER-------------ADD COLOR HERE after dbconnection
                 productData.sizes.map((item, index) => (
-                  <button onClick={() => setSize(item)} className={`w-10 h-10 rounded-full bg-red-500`} key={index} ></button>
+                  <button onClick={() => setSize(item)} className={`w-10 h-10 rounded-full bg-red-500 cursor-pointer`} key={index} ></button>
                 ))
               }
             </div>
@@ -94,7 +96,7 @@ const Product = () => {
                   onClick={decrease}
                   className="px-3 py-1 text-md font-semibold cursor-pointer"
                 >
-                  −
+                  -
                 </button>
                 <input
                   type="number"
@@ -114,7 +116,7 @@ const Product = () => {
               </div>
 
               {/* Add to Cart Button */}
-              <button className="border px-8 py-3 text-lg font-medium bg-white rounded-xl transition-all active:bg-black active:text-white">
+              <button onClick={() => addToCart(productData._id, size)} className="border px-8 py-3 text-lg font-medium bg-white rounded-xl transition-all active:bg-black active:text-white cursor-pointer">
                 Add to Cart
               </button>
             </div>
@@ -183,7 +185,7 @@ const Product = () => {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`pb-1 text-lg font-medium transition ${activeTab === tab
+              className={`pb-1 text-lg font-medium transition cursor-pointer ${activeTab === tab
                 ? "text-black border-b-2 border-black"
                 : "text-gray-500 hover:text-black"
                 }`}
@@ -210,20 +212,7 @@ const Product = () => {
         </div>
       </div>
       {/* Related products */}
-      <SubTitle title={'Related Products'} />
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-6">
-        {products.slice(1, 5).map((item) => (
-          <ProductItem
-            key={item._id}
-            id={item._id}
-            name={item.name}
-            price={item.price}
-            image={item.image}
-          // 👇
-          />
-        ))}
-      </div>
+      <RelatedProducts category={productData.category} />
     </div >
   ) : <div className="opacity-0"></div>
 }

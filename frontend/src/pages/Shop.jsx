@@ -24,14 +24,16 @@ const Shop = () => {
     }
   };
 
-
   // Apply filter & sort
   useEffect(() => {
     let productsCopy = [...products];
 
     if (showSearch && search) {
-      productsCopy = productsCopy.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
+      productsCopy = productsCopy.filter(item =>
+        item.name.toLowerCase().includes(search.toLowerCase())
+      );
     }
+
     if (category.length > 0) {
       productsCopy = productsCopy.filter((p) => category.includes(p.category));
     }
@@ -59,12 +61,10 @@ const Shop = () => {
 
       {/* Tab */}
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4 py-4 px-6 bg-gray-100 rounded-md shadow-sm">
-
         <div className="flex items-center gap-4">
           <button
             onClick={() => setOpen(!open)}
-            className={`flex gap-1 items-center hover:cursor-pointer py-2 px-2 ${open ? "bg-gray-300" : "hover:bg-gray-200"
-              }`}
+            className={`flex gap-1 items-center hover:cursor-pointer py-2 px-2 ${open ? "bg-gray-300" : "hover:bg-gray-200"}`}
           >
             <LuSlidersHorizontal />
             <span className="text-gray-600 font-semibold">Filter:</span>
@@ -74,8 +74,7 @@ const Shop = () => {
             {/* Grid view button */}
             <button
               onClick={() => setView("grid")}
-              className={`p-2 rounded transition ${view === "grid" ? "bg-gray-300" : "hover:bg-gray-200"
-                }`}
+              className={`p-2 rounded transition ${view === "grid" ? "bg-gray-300" : "hover:bg-gray-200"}`}
             >
               <LuLayoutGrid className="w-5 h-5" />
             </button>
@@ -83,8 +82,7 @@ const Shop = () => {
             {/* Column view button */}
             <button
               onClick={() => setView("column")}
-              className={`p-2 rounded transition ${view === "column" ? "bg-gray-300" : "hover:bg-gray-200"
-                }`}
+              className={`p-2 rounded transition ${view === "column" ? "bg-gray-300" : "hover:bg-gray-200"}`}
             >
               <LuAlignVerticalSpaceAround className="w-5 h-5" />
             </button>
@@ -99,7 +97,6 @@ const Shop = () => {
 
         {/* Right */}
         <div className="flex flex-col sm:flex-row gap-5 items-center">
-
           <div className="flex items-center gap-2 text-gray-700 text-sm">
             <span>Show:</span>
             <input
@@ -162,12 +159,9 @@ const Shop = () => {
       {/* Products */}
       <div className="flex-1 p-5">
         <div
-          className={`grid gap-4 gap-y-6 ${view === "grid"
-            ? "grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-            : "grid-cols-1"
-            }`}
+          className={`grid gap-4 gap-y-6 ${view === "grid" ? "grid-cols-2 md:grid-cols-3 lg:grid-cols-4" : "grid-cols-1"}`}
         >
-          {paginatedProducts.map((item, index) => (
+          {paginatedProducts.map((item) => (
             <ProductItem
               key={item._id}
               id={item._id}
@@ -181,8 +175,7 @@ const Shop = () => {
       </div>
 
       {/* Pagination */}
-      <div className="flex justify-center items-center my-6 gap-2 ">
-
+      <div className="flex justify-center items-center my-6 gap-2">
         {page > 1 && (
           <button
             onClick={() => setPage(page - 1)}
@@ -192,20 +185,61 @@ const Shop = () => {
           </button>
         )}
 
+        {(() => {
+          const maxButtons = 5;
+          let start = Math.max(1, page - 2);
+          let end = start + maxButtons - 1;
 
-        {Array.from({ length: totalPages }, (_, i) => (
-          <button
-            key={i}
-            onClick={() => setPage(i + 1)}
-            className={`px-3 py-1 rounded transition-colors ${page === i + 1
-              ? "bg-[#FBEBB5] font-semibold"
-              : "bg-[#FFF9E5] hover:bg-[#FBEBB5]"
-              }`}
-          >
-            {i + 1}
-          </button>
-        ))}
+          if (end > totalPages) {
+            end = totalPages;
+            start = Math.max(1, end - maxButtons + 1);
+          }
 
+          const buttons = [];
+
+          if (start > 1) {
+            buttons.push(
+              <button
+                key={1}
+                onClick={() => setPage(1)}
+                className={`px-3 py-1 rounded transition-colors ${page === 1 ? "bg-[#FBEBB5] font-semibold" : "bg-[#FFF9E5] hover:bg-[#FBEBB5]"
+                  }`}
+              >
+                1
+              </button>
+            );
+            if (start > 2) buttons.push(<span key="start-ellipsis">…</span>);
+          }
+
+          for (let i = start; i <= end; i++) {
+            buttons.push(
+              <button
+                key={i}
+                onClick={() => setPage(i)}
+                className={`px-3 py-1 rounded transition-colors ${page === i ? "bg-[#FBEBB5] font-semibold" : "bg-[#FFF9E5] hover:bg-[#FBEBB5]"
+                  }`}
+              >
+                {i}
+              </button>
+            );
+          }
+
+          if (end < totalPages) {
+            if (end < totalPages - 1) buttons.push(<span key="end-ellipsis">…</span>);
+            buttons.push(
+              <button
+                key={totalPages}
+                onClick={() => setPage(totalPages)}
+                className={`px-3 py-1 rounded transition-colors ${page === totalPages ? "bg-[#FBEBB5] font-semibold" : "bg-[#FFF9E5] hover:bg-[#FBEBB5]"
+                  }`}
+              >
+                {totalPages}
+              </button>
+            );
+          }
+
+          return buttons;
+        })()}
 
         {page < totalPages && (
           <button

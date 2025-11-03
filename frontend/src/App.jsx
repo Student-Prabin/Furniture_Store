@@ -12,6 +12,7 @@ import Navbar from "./components/Navbar.jsx"
 import Footer from "./components/Footer.jsx"
 import Benifits from "./components/Benifits.jsx"
 import SearchBar from "./components/SearchBar.jsx"
+import CartPage from "./pages/CartPage.jsx"
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/product/:id" element={<Product />} />
+        <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/myAccount" element={<MyAccount />} />
         <Route path="/blog" element={<Blog />} />

@@ -58,7 +58,7 @@ const Home = () => {
             />
             <div className="mt-4 w-full text-center flex flex-col justify-end flex-1">
               <p className="text-4xl font-semibold">Side Table</p>
-              <Button to={'/'} text={"View More"} />
+              <Button to={'/shop'} text={"View More"} />
             </div>
           </div>
 
@@ -71,7 +71,7 @@ const Home = () => {
             />
             <div className="mt-4 w-full text-center flex flex-col justify-end flex-1">
               <p className="text-4xl font-semibold">Side Table</p>
-              <Button to={'/'} text={"View More"} />
+              <Button to={'/shop'} text={"View More"} />
             </div>
           </div>
 
@@ -91,7 +91,7 @@ const Home = () => {
         </div>
 
         <div className="flex justify-center my-5">
-          <Button to={'/'} text={'View More'} />
+          <Button to={'/shop'} text={'View More'} />
         </div>
       </div>
       {/* New Arrival */}

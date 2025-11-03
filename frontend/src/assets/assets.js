@@ -77,7 +77,7 @@ export const assets = {
   asgardSofa,
   blog_1,
   blog_2,
-  blog_3
+  blog_3,
 }
 
 export const products = [

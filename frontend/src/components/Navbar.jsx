@@ -41,12 +41,11 @@ const Navbar = () => {
         {/* user dropdown */}
         <div className="group relative ">
           <LuUser size={20} className="cursor-pointer" />
-          <div className="group-hover:block hidden absolute dropdown-menu right-0 pt-4 text-xs">
+          <div className="group-hover:block hidden absolute dropdown-menu right-0 pt-4 text-xs z-50">
             <div className="flex flex-col gap-2 w-30 py-3 px-5 bg-slate-100">
               <Link to={'/myAccount'} className="relative">
                 <p className="cursor-pointer hover:text-gray-700">My Account</p>
               </Link>
-              <p className="cursor-pointer hover:text-gray-700">Orders</p>
               <p className="cursor-pointer hover:text-gray-700">Log Out</p>
             </div>
           </div>
