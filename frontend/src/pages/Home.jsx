@@ -110,7 +110,7 @@ const Home = () => {
           <p className="text-2xl sm:text-3xl ml-15">New Arrivals</p>
           <p className="text-4xl sm:text-5xl font-bold">Asgard Sofa</p>
           <Link to="/">
-            <button className="bg-transparent border border-black text-black px-10 py-3 font-semibold hover:bg-black hover:text-white transition-colors duration-300 mt-5 ml-15">
+            <button className="bg-transparent border border-black text-black px-10 py-3 font-semibold hover:bg-black hover:text-white transition-colors duration-300 mt-5 ml-15 cursor-pointer">
               Order Now
             </button>
 
@@ -142,7 +142,7 @@ const Home = () => {
             Follow Our Store on Instagram
           </h2>
           <Link to="/">
-            <button className="bg-[#FAF4F4] rounded-full px-10 py-3 text-xl shadow-lg hover:shadow-lg hover:bg-[#f1e9e9de] transition-all duration-100">
+            <button className="bg-[#FAF4F4] rounded-full px-10 py-3 text-xl shadow-lg hover:shadow-lg hover:bg-[#f1e9e9de] transition-all duration-100 cursor-pointer">
               Follow Us
             </button>
           </Link>

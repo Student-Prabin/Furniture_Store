@@ -97,7 +97,7 @@ const About = () => {
         <p className="text-gray-700 mb-6">
           Explore our latest collections and bring your dream interiors to life today.
         </p>
-        <button onClick={() => nav('/shop')} className="border border-black rounded-md px-6 py-2 hover:bg-black hover:text-white transition">
+        <button onClick={() => nav('/shop')} className="border border-black rounded-md px-6 py-2 hover:bg-black hover:text-white transition cursor-pointer">
           Shop Now
         </button>
       </div>

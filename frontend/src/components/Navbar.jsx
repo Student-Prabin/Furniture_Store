@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import { assets } from "../assets/assets.js"
 import { LuChevronLeft, LuHeart, LuMenu, LuSearch, LuShoppingCart, LuUser } from "react-icons/lu";
 import { useContext, useState } from "react";
@@ -10,6 +10,8 @@ const Navbar = () => {
   const isHome = location.pathname === "/";
   const [visible, setVisible] = useState(false);
   const { showSearch, setShowSearch } = useContext(ShopContext);
+  const nav = useNavigate();
+
   return (
     <div className={`sm:px-20 flex items-center justify-between py-5 font-medium ${isHome ? "bg-[#FBEBB5]" : "bg-white"}`}>
       <NavLink to={'/'} className="flex not-lg:flex-col items-center">
@@ -53,7 +55,7 @@ const Navbar = () => {
         </div>
         <LuSearch className="cursor-pointer" onClick={() => setShowSearch(!showSearch)} />
         <LuHeart className="cursor-pointer" />
-        <LuShoppingCart className="cursor-pointer" />
+        <LuShoppingCart className="cursor-pointer" onClick={() => nav('/cart')} />
         <LuMenu onClick={() => setVisible(true)} className="cursor-pointer sm:hidden" />
 
         {/* sidebar menu for mobiles */}
